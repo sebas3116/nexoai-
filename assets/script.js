@@ -2,7 +2,7 @@
 // CONFIGURA AQUÍ tu número de WhatsApp de negocio (con indicativo, sin +, sin espacios)
 // Ejemplo Colombia: "573001234567"
 // ============================================================
-const WHATSAPP_NUMBER = "573000000000";
+const WHATSAPP_NUMBER = "573165341545";
 
 // ============================================================
 // 1. Cielo dinámico: la página "amanece" según el scroll
@@ -51,6 +51,13 @@ function updateSky(){
     nav.classList.add('nav-light');
   } else {
     nav.classList.remove('nav-light');
+  }
+
+  // nav gana fondo con blur al hacer scroll
+  if (scrollTop > 40) {
+    nav.classList.add('nav-scrolled');
+  } else {
+    nav.classList.remove('nav-scrolled');
   }
 }
 
@@ -188,12 +195,8 @@ Clientes al mes: ${volumen}`;
 // ============================================================
 const waFloat = document.getElementById('waFloat');
 waFloat.addEventListener('click', (e) => {
-  // Si el número ya fue configurado arriba, abre WhatsApp directo.
-  if (WHATSAPP_NUMBER && WHATSAPP_NUMBER !== "573000000000") {
-    e.preventDefault();
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hola, quiero saber más sobre NexoAI')}`, '_blank');
-  }
-  // si no, el href="#formulario" hace scroll normal al formulario
+  e.preventDefault();
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hola, quiero saber más sobre NexoAI')}`, '_blank');
 });
 
 // ============================================================
