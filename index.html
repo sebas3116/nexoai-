@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexoAI | Tu WhatsApp, tu nuevo vendedor 24/7</title>
+<meta name="description" content="NexoAI usa inteligencia artificial para responder tus clientes por WhatsApp, organizar oportunidades y hacer seguimiento automático mientras tú duermes.">
+<meta name="keywords" content="inteligencia artificial, IA para empresas, automatización de ventas, WhatsApp para empresas, CRM, automatización empresarial, NexoAI">
+
+<meta property="og:title" content="NexoAI | Tu WhatsApp, tu nuevo vendedor 24/7">
+<meta property="og:description" content="Automatiza la atención de tus clientes por WhatsApp con inteligencia artificial. Solicita tu acceso anticipado.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/og-image.png">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2246%22 fill=%22%230A0F1E%22/><circle cx=%2250%22 cy=%2250%22 r=%2222%22 fill=%22%23FF7A59%22/></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- Capa fija de cielo: cambia de noche a día según el scroll -->
+<div class="sky" id="sky" aria-hidden="true">
+  <div class="stars" id="stars"></div>
+</div>
+
+<!-- Arco solar/lunar: el "reloj" que marca el avance por la página -->
+<div class="arc-wrap" aria-hidden="true">
+  <svg class="arc" viewBox="0 0 400 90" preserveAspectRatio="none">
+    <path id="arcPath" d="M 10 85 Q 200 -10 390 85" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="1.5" stroke-dasharray="1 7" stroke-linecap="round"/>
+  </svg>
+  <div class="arc-marker" id="arcMarker">🌙</div>
+</div>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo">
+      <span class="logo-dot"></span> NexoAI
+    </a>
+    <nav class="nav-links">
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#funciones">Funciones</a>
+      <a href="#acceso">Acceso anticipado</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a href="#formulario" class="btn btn-primary btn-small">Solicitar demo</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="#como-funciona">Cómo funciona</a>
+    <a href="#funciones">Funciones</a>
+    <a href="#acceso">Acceso anticipado</a>
+    <a href="#faq">FAQ</a>
+    <a href="#formulario" class="btn btn-primary">Solicitar demo</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">Inteligencia artificial · Hecho para Latinoamérica</p>
+        <h1>Mientras tú duermes,<br>tu negocio sigue <span class="highlight">vendiendo</span>.</h1>
+        <p class="hero-sub">NexoAI responde a tus clientes por WhatsApp, organiza cada oportunidad y hace seguimiento automático — a las 3 de la tarde o a las 3 de la mañana.</p>
+        <div class="hero-actions">
+          <a href="#formulario" class="btn btn-primary">Solicitar una demostración</a>
+          <a href="#solucion" class="btn btn-ghost">Ver cómo funciona ↓</a>
+        </div>
+        <p class="hero-fine">Diseñado para pequeñas y medianas empresas de Latinoamérica.</p>
+      </div>
+
+      <div class="hero-visual">
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-head">
+            <div class="phone-avatar">N</div>
+            <div>
+              <div class="phone-name">NexoAI</div>
+              <div class="phone-status"><span class="dot-online"></span> activo ahora</div>
+            </div>
+            <div class="phone-clock" id="phoneClock">2:47 a.m.</div>
+          </div>
+          <div class="phone-body" id="chatBody">
+            <!-- los mensajes se inyectan por JS -->
+          </div>
+          <div class="phone-input">
+            <span class="typing-dots" id="typingDots" hidden><i></i><i></i><i></i></span>
+            <span class="phone-input-placeholder">Escribe un mensaje…</span>
+          </div>
+        </div>
+        <div class="badge-float">⚡ Responde en segundos</div>
+        <div class="badge-float badge-float-2">😴 Tú, durmiendo</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEMA -->
+  <section class="section problema">
+    <div class="container">
+      <p class="eyebrow eyebrow-light">El costo del silencio</p>
+      <h2>Cada conversación puede<br>convertirse en una venta.</h2>
+      <p class="section-lead">Pero cuando tardas en responder, olvidas hacer seguimiento o pierdes información de tus clientes, esas oportunidades desaparecen en el chat — y no vuelven.</p>
+
+      <div class="cards-3">
+        <div class="card-dark">
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Respuestas tardías</h3>
+          <p>Tus clientes esperan respuestas rápidas. Si tú no respondes, alguien más lo hará.</p>
+        </div>
+        <div class="card-dark">
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 4 1.5 5.5 2 6.5H4c.5-1 2-2.5 2-6.5Z"/><path d="M10 19a2 2 0 0 0 4 0"/></svg></div>
+          <h3>Seguimientos olvidados</h3>
+          <p>Muchos clientes muestran interés y simplemente quedan en el olvido, entre cien chats más.</p>
+        </div>
+        <div class="card-dark">
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11Z"/><path d="M10 16a2 2 0 0 0 2 2"/></svg></div>
+          <h3>Ventas perdidas</h3>
+          <p>Cada conversación sin seguimiento puede ser una oportunidad que nunca vuelve a escribir.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUCIÓN -->
+  <section class="section solucion" id="solucion">
+    <div class="container">
+      <p class="eyebrow eyebrow-light">La otra cara del reloj</p>
+      <h2>NexoAI trabaja mientras tú<br>haces crecer tu negocio.</h2>
+      <p class="section-lead">Centraliza tus conversaciones y usa inteligencia artificial para automatizar las tareas repetitivas que hoy te quitan tiempo — en este orden, todos los días.</p>
+
+      <div class="steps-row">
+        <div class="step">
+          <span class="step-num">01</span>
+          <h3>Responde</h3>
+          <p>NexoAI ayuda a resolver preguntas frecuentes y orienta a tus clientes al instante.</p>
+        </div>
+        <div class="step-line" aria-hidden="true"></div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <h3>Organiza</h3>
+          <p>Cada oportunidad queda registrada, para que sepas exactamente quién está interesado.</p>
+        </div>
+        <div class="step-line" aria-hidden="true"></div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <h3>Haz seguimiento</h3>
+          <p>Mantiene el contacto con tus clientes y evita que las oportunidades se enfríen.</p>
+        </div>
+      </div>
+
+      <a href="#formulario" class="btn btn-primary btn-center">Quiero conocer NexoAI</a>
+    </div>
+  </section>
+
+  <!-- FUNCIONES -->
+  <section class="section funciones" id="funciones">
+    <div class="container">
+      <p class="eyebrow">Todo en un solo lugar</p>
+      <h2>Todo lo que necesitas para convertir<br>conversaciones en oportunidades.</h2>
+
+      <div class="grid-6">
+        <div class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 4V5Z"/><path d="M8 9h8M8 12h5"/></svg></div>
+          <h3>Atención inteligente</h3>
+          <p>Responde preguntas frecuentes y da información de tu negocio de forma automática.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M15.5 14.2c2.6.5 4.5 2.7 4.5 5.8"/></svg></div>
+          <h3>Clientes organizados</h3>
+          <p>Mantén la información de tus clientes y oportunidades en un solo lugar.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5h9l2 4v10H6z"/><path d="M9 5v14M6 12h11"/></svg></div>
+          <h3>Cotizaciones</h3>
+          <p>Facilita la creación y el envío de cotizaciones para responder más rápido.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 14-5.3L21 9"/><path d="M21 4v5h-5"/><path d="M20 12a8 8 0 0 1-14 5.3L3 15"/><path d="M3 20v-5h5"/></svg></div>
+          <h3>Seguimiento</h3>
+          <p>Reduce las oportunidades perdidas manteniendo vivas las conversaciones importantes.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M12 20V4M20 20v-7"/><path d="M2 20h20"/></svg></div>
+          <h3>Información de tu negocio</h3>
+          <p>Visualiza tus conversaciones y oportunidades para entender a tus clientes.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg></div>
+          <h3>Automatización</h3>
+          <p>La tecnología se encarga de lo repetitivo, mientras tú haces crecer tu empresa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CÓMO FUNCIONA -->
+  <section class="section como-funciona" id="como-funciona">
+    <div class="container">
+      <p class="eyebrow">De cero a automatizado</p>
+      <h2>Empieza en pocos pasos.</h2>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="timeline-num">01</span>
+          <div>
+            <h3>Cuéntanos sobre tu negocio</h3>
+            <p>Conocemos tus productos, servicios, clientes y la forma en la que trabajas hoy.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-num">02</span>
+          <div>
+            <h3>Configura NexoAI</h3>
+            <p>Adaptamos la plataforma a las necesidades reales de tu negocio.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-num">03</span>
+          <div>
+            <h3>Conecta tus canales</h3>
+            <p>Integramos las herramientas que ya usas para hablar con tus clientes.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-num">04</span>
+          <div>
+            <h3>Deja que NexoAI trabaje</h3>
+            <p>Automatiza tareas, organiza oportunidades y dedica tu tiempo a crecer.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARA QUIÉN ES -->
+  <section class="section para-quien">
+    <div class="container">
+      <p class="eyebrow">¿Es NexoAI para ti?</p>
+      <h2>Creado para negocios<br>que quieren crecer.</h2>
+
+      <div class="grid-audience">
+        <div class="audience-card"><span>🏢</span><h3>Empresas de servicios</h3><p>Automatiza consultas, cotizaciones y seguimiento.</p></div>
+        <div class="audience-card"><span>🏠</span><h3>Inmobiliarias</h3><p>Organiza prospectos y responde consultas rápidamente.</p></div>
+        <div class="audience-card"><span>🛍️</span><h3>Tiendas</h3><p>Atiende clientes y facilita el proceso de compra.</p></div>
+        <div class="audience-card"><span>🚗</span><h3>Talleres y servicios</h3><p>Gestiona consultas, solicitudes y clientes.</p></div>
+        <div class="audience-card"><span>📣</span><h3>Agencias</h3><p>Centraliza conversaciones y oportunidades comerciales.</p></div>
+        <div class="audience-card"><span>💼</span><h3>Profesionales independientes</h3><p>Automatiza parte de tu atención sin perder el trato personal.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESO ANTICIPADO / PRECIOS -->
+  <section class="section acceso" id="acceso">
+    <div class="container">
+      <div class="acceso-grid">
+        <div>
+          <p class="eyebrow">Precios · Próximamente</p>
+          <h2>Sé de los primeros en probar NexoAI.</h2>
+          <p class="section-lead">Estamos preparando los primeros planes y seleccionando un grupo limitado de empresas colombianas para probar una nueva forma de automatizar su atención y seguimiento de clientes con inteligencia artificial.</p>
+
+          <ul class="benefits">
+            <li><span class="check">✓</span><div><strong>Acceso anticipado</strong><p>Conoce las nuevas funciones antes del lanzamiento general.</p></div></li>
+            <li><span class="check">✓</span><div><strong>Precio especial de lanzamiento</strong><p>Los primeros clientes tendrán condiciones especiales.</p></div></li>
+            <li><span class="check">✓</span><div><strong>Participación en el desarrollo</strong><p>Tu feedback ayuda a definir las próximas funciones.</p></div></li>
+            <li><span class="check">✓</span><div><strong>Soporte directo</strong><p>Comunicación directa con nuestro equipo desde el día uno.</p></div></li>
+          </ul>
+
+          <a href="#formulario" class="btn btn-primary">Quiero acceso anticipado</a>
+        </div>
+
+        <div class="acceso-card">
+          <p class="acceso-card-label">Cupos etapa inicial</p>
+          <p class="acceso-card-big">🚀 Grupo limitado</p>
+          <p class="acceso-card-text">Estamos seleccionando empresas colombianas, una por una, para construir NexoAI junto a quienes lo van a usar de verdad.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMULARIO -->
+  <section class="section formulario" id="formulario">
+    <div class="container container-narrow">
+      <p class="eyebrow">Último paso</p>
+      <h2>Cuéntanos sobre tu negocio.</h2>
+      <p class="section-lead">Déjanos tus datos y al enviarlos se abrirá WhatsApp con tu información lista para enviarnos — así empezamos la conversación de inmediato.</p>
+
+      <form class="form" id="leadForm">
+        <div class="form-row">
+          <label>Nombre
+            <input type="text" name="nombre" placeholder="Tu nombre" required>
+          </label>
+          <label>Empresa
+            <input type="text" name="empresa" placeholder="Nombre de tu empresa" required>
+          </label>
+        </div>
+        <div class="form-row">
+          <label>WhatsApp
+            <input type="tel" name="whatsapp" placeholder="+57 300 000 0000" required>
+          </label>
+          <label>Correo
+            <input type="email" name="correo" placeholder="tu@empresa.com" required>
+          </label>
+        </div>
+        <div class="form-row">
+          <label>Tipo de negocio
+            <select name="tipo" required>
+              <option value="" disabled selected>Selecciona una opción</option>
+              <option>Servicios</option>
+              <option>Comercio</option>
+              <option>Inmobiliaria</option>
+              <option>Restaurante</option>
+              <option>Tecnología</option>
+              <option>Agencia</option>
+              <option>Otro</option>
+            </select>
+          </label>
+          <label>¿Cuántos clientes atiendes al mes?
+            <select name="volumen" required>
+              <option value="" disabled selected>Selecciona una opción</option>
+              <option>Menos de 50</option>
+              <option>50–100</option>
+              <option>100–500</option>
+              <option>500–1.000</option>
+              <option>Más de 1.000</option>
+            </select>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full">Quiero conocer NexoAI</button>
+        <p class="form-fine">Al enviar este formulario aceptas nuestra <a href="#">Política de Privacidad</a>.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq" id="faq">
+    <div class="container container-narrow">
+      <p class="eyebrow">Preguntas frecuentes</p>
+      <h2>Resolvemos tus dudas.</h2>
+
+      <div class="accordion">
+        <div class="acc-item">
+          <button class="acc-trigger">¿Qué es NexoAI? <span>+</span></button>
+          <div class="acc-panel"><p>Una plataforma de automatización empresarial basada en inteligencia artificial que ayuda a los negocios a gestionar conversaciones, clientes y oportunidades de venta.</p></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger">¿NexoAI ya está disponible? <span>+</span></button>
+          <div class="acc-panel"><p>Estamos preparando el lanzamiento y seleccionando empresas para participar en nuestra etapa inicial.</p></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger">¿Para qué tipo de empresas está diseñado? <span>+</span></button>
+          <div class="acc-panel"><p>Inicialmente para pequeñas y medianas empresas que reciben consultas frecuentes de clientes y necesitan mejorar su atención y seguimiento.</p></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger">¿Necesito conocimientos técnicos? <span>+</span></button>
+          <div class="acc-panel"><p>No. La plataforma está pensada para que cualquier negocio pueda usarla sin conocimientos técnicos.</p></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger">¿NexoAI reemplaza a mis empleados? <span>+</span></button>
+          <div class="acc-panel"><p>No. El objetivo es automatizar tareas repetitivas y ayudar a tu equipo a trabajar de forma más eficiente.</p></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger">¿Cómo puedo probarlo? <span>+</span></button>
+          <div class="acc-panel"><p>Solicita tu acceso anticipado con el formulario de esta página.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="section cta-final">
+    <div class="container">
+      <h2>Tu próximo cliente podría estar<br>esperando una respuesta.</h2>
+      <p class="section-lead">Empieza a construir una atención más rápida, inteligente y organizada con NexoAI.</p>
+      <a href="#formulario" class="btn btn-primary">Solicitar una demostración</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <a href="#top" class="logo logo-footer"><span class="logo-dot"></span> NexoAI</a>
+      <p>Inteligencia artificial para hacer crecer los negocios latinoamericanos.</p>
+    </div>
+    <div>
+      <h4>Producto</h4>
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#acceso">Precios</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div>
+      <h4>Contacto</h4>
+      <a href="#">Política de Privacidad</a>
+      <a href="#">Términos y Condiciones</a>
+    </div>
+    <div>
+      <h4>Redes</h4>
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+      <p class="footer-loc">Bogotá, Colombia 🇨🇴</p>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p>© 2026 NexoAI. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<!-- Botón flotante de WhatsApp -->
+<a href="#formulario" class="wa-float" id="waFloat" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1.1 2.8 1.2 3c.1.2 2.2 3.4 5.4 4.7.8.3 1.4.5 1.8.7.8.2 1.5.2 2 .1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.4Z"/><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>
+</a>
+
+<script src="assets/script.js"></script>
+</body>
+</html>
